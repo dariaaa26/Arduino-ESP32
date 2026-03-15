@@ -1,0 +1,146 @@
+#include <Arduino.h>
+
+#define DIGIT1 15
+#define DIGIT2 2
+#define SEGMENT_A 4
+#define SEGMENT_B 16
+#define SEGMENT_C 17
+#define SEGMENT_D 5
+#define SEGMENT_E 18
+#define SEGMENT_F 19
+#define SEGMENT_G 21
+#define SEGMENT_DP 22
+
+void setup() {
+    pinMode(DIGIT1, OUTPUT);
+    pinMode(DIGIT2, OUTPUT);
+    pinMode(SEGMENT_A, OUTPUT);
+    pinMode(SEGMENT_B, OUTPUT);
+    pinMode(SEGMENT_C, OUTPUT);
+    pinMode(SEGMENT_D, OUTPUT);
+    pinMode(SEGMENT_E, OUTPUT);
+    pinMode(SEGMENT_F, OUTPUT);
+    pinMode(SEGMENT_G, OUTPUT);
+    pinMode(SEGMENT_DP, OUTPUT);
+    Serial.begin(115200);
+}
+
+void aprindeCifra(byte digitNumber) {
+    switch (digitNumber) {
+        case 1:
+            digitalWrite(SEGMENT_A, LOW);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, LOW);
+            digitalWrite(SEGMENT_E, LOW);
+            digitalWrite(SEGMENT_F, LOW);
+            digitalWrite(SEGMENT_G, LOW);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 2:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, LOW);
+            digitalWrite(SEGMENT_D, HIGH);
+            digitalWrite(SEGMENT_E, HIGH);
+            digitalWrite(SEGMENT_F, LOW);
+            digitalWrite(SEGMENT_G, HIGH);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 3:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, HIGH);
+            digitalWrite(SEGMENT_E, LOW);
+            digitalWrite(SEGMENT_F, LOW);
+            digitalWrite(SEGMENT_G, HIGH);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 4:
+            digitalWrite(SEGMENT_A, LOW);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, LOW);
+            digitalWrite(SEGMENT_E, LOW);
+            digitalWrite(SEGMENT_F, HIGH);
+            digitalWrite(SEGMENT_G, HIGH);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 5:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, LOW);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, HIGH);
+            digitalWrite(SEGMENT_E, LOW);
+            digitalWrite(SEGMENT_F, HIGH);
+            digitalWrite(SEGMENT_G, HIGH);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 6:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, LOW);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, HIGH);
+            digitalWrite(SEGMENT_E, HIGH);
+            digitalWrite(SEGMENT_F, HIGH);
+            digitalWrite(SEGMENT_G, HIGH);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 7:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, LOW);
+            digitalWrite(SEGMENT_E, LOW);
+            digitalWrite(SEGMENT_F, LOW);
+            digitalWrite(SEGMENT_G, LOW);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 8:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, HIGH);
+            digitalWrite(SEGMENT_E, HIGH);
+            digitalWrite(SEGMENT_F, HIGH);
+            digitalWrite(SEGMENT_G, HIGH);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 9:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, HIGH);
+            digitalWrite(SEGMENT_E, LOW);
+            digitalWrite(SEGMENT_F, HIGH);
+            digitalWrite(SEGMENT_G, HIGH);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+        case 0:
+            digitalWrite(SEGMENT_A, HIGH);
+            digitalWrite(SEGMENT_B, HIGH);
+            digitalWrite(SEGMENT_C, HIGH);
+            digitalWrite(SEGMENT_D, HIGH);
+            digitalWrite(SEGMENT_E, HIGH);
+            digitalWrite(SEGMENT_F, HIGH);
+            digitalWrite(SEGMENT_G, LOW);
+            digitalWrite(SEGMENT_DP, LOW);
+            break;
+    }
+}
+
+void loop() {
+    for (int i = 0; i < 100; i++) {
+        for (int j = 0; j < 1000 / 20; ++j) {
+            digitalWrite(DIGIT1, HIGH);
+            digitalWrite(DIGIT2, LOW);
+            aprindeCifra(i % 10);
+            delay(10);
+            digitalWrite(DIGIT1, LOW);
+            digitalWrite(DIGIT2, HIGH);
+            aprindeCifra(i / 10);
+            delay(10);
+        }
+    }
+}
